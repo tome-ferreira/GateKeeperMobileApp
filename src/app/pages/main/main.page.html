@@ -1,0 +1,235 @@
+<!--
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>main</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">main</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content>-->
+
+<ion-tabs>
+  <ion-tab tab="home">
+    <div id="home-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Início</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true" style="color: #000">
+        <div class="example-content">
+          <div class="example-content">
+            <ion-button expand="block" (click)="openDigitalCardModal()" class="button custom-button">
+              <ion-icon name="id-card-outline" slot="start" class="custom-icon"></ion-icon> 
+              Cartão digital
+            </ion-button>
+          </div>
+          
+          <h2 class="center-title">Horário</h2>
+          <div class="containner">
+            <div style="display: flex; align-items: center; justify-content: center;">
+              <!-- Previous  -->
+              <ion-button expand="block" class="button" style="flex: 0 0 auto; margin-right: 10px;" (click)="Previous()">&lt;</ion-button>
+              
+              <!-- Date -->
+              <div style="flex: 1; text-align: center; font-weight: bold;">
+                {{ getDateLabel() }}
+              </div>
+              <!-- Next  -->
+              <ion-button expand="block" class="button" style="flex: 0 0 auto; margin-left: 10px;" (click)="Next()">&gt;</ion-button>
+            </div>
+
+            <ion-list>
+              <ion-item lines="none" *ngFor="let shift of shiftsOnTimeTable">
+                <ion-label lines="none" class="a-simple list-member">
+                  <h2>{{ shift.name }}</h2>
+                  <h2>{{ shift.starts | date:'HH:mm' }} - {{ shift.ends | date:'HH:mm' }}</h2>
+                  
+                </ion-label>
+              </ion-item>
+    
+              <ion-item lines="none" *ngIf="!shiftsForRegister || shiftsForRegister.length === 0">
+                <ion-label lines="none" style="color: white;">É tudo por hoje!.</ion-label>
+              </ion-item>
+            </ion-list>
+
+          </div>
+        </div>
+      </ion-content>
+    </div>
+  </ion-tab>
+
+
+
+
+
+  <ion-tab tab="absenses">
+    <div id="absenses-page">
+      <ion-header slot="top">
+        <ion-toolbar>
+          <ion-title>Justificação de faltas</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true">
+        <div class="example-content">
+          <ion-button expand="block" (click)="openCreateAbsJusModal()" class="button">Justificar falta</ion-button>
+        </div>
+        <div class="example-content">
+          <ion-list lines="none" color="transparent">
+            <!-- Loop through the absense justifications -->
+            <ion-item lines="none" *ngFor="let absense of absenseJus" color="transparent">
+              <a (click)="openEditAbsJusModal(absense)" class="a-simple list-member">
+                <ion-label lines="none" color="transparent">
+                  <h2>{{ absense.start | date:'dd/MM/yyyy' }} - {{ absense.end | date:'dd/MM/yyyy' }}</h2>
+                  <div 
+                    class="status-label" 
+                    [ngStyle]="{ 'background-color': getStatusColor(absense.status) }">
+                    {{ getStatusText(absense.status) }}
+                  </div>
+                </ion-label>
+              </a>
+            </ion-item>
+            <!-- Display this message if there are no absense justifications -->
+            <ion-item lines="none" *ngIf="!absenseJus || absenseJus.length === 0" color="transparent">
+              <ion-label lines="none" color="transparent">Não submeteu nenhuma justificação.</ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-content>
+    </div>
+  </ion-tab>
+  
+
+
+
+
+
+  <ion-tab tab="offdays">
+    <div id="offdays-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Pedidos de férias e folgas</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true">
+        <div class="example-content">
+          <ion-button expand="block" (click)="openCreateOffdayResModal()" class="button">Fazer pedido</ion-button>
+        </div>
+        <div class="example-content">
+          <ion-list lines="none">
+            
+            <ion-item lines="none" *ngFor="let offday of offdayRes">
+              <a (click)="openEditOffdayResModal(offday)" class="a-simple list-member">
+                <ion-label lines="none">
+                  <h2>{{ offday.start | date:'dd/MM/yyyy' }} - {{ offday.end | date:'dd/MM/yyyy' }}</h2>
+                  <div 
+                    class="status-label" 
+                    [ngStyle]="{ 'background-color': getStatusColor(offday.status) }">
+                    {{ getStatusText(offday.status) }}
+                  </div>
+                </ion-label>
+              </a>
+            </ion-item>
+            
+            <ion-item  lines="none" *ngIf="!offdayRes || offdayRes.length === 0">
+              <ion-label lines="none">Não submeteu nenhum pedido de folgas ou férias.</ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-content>
+    </div>
+  </ion-tab>
+
+
+
+
+
+
+
+
+
+  <ion-tab tab="reader">
+    <div id="reader-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Leitor</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true">
+        <div class="example-content">
+          <ion-list lines="none">
+            <ion-item lines="none" *ngFor="let shift of shiftsForRegister">
+              <ion-label class="list-member-shift">
+                <div class="shift-header">
+                  <h2>{{ shift.name }}</h2>
+                </div>
+                <div class="shift-times">
+                  <h2>{{ shift.starts | date:'dd/MM/yyyy, HH:mm' }} - {{ shift.ends | date:'dd/MM/yyyy, HH:mm' }}</h2>
+                </div>
+                <div class="shift-status">
+                  <h3 [class.active]="isShiftActive(shift)" [class.closed]="!isShiftActive(shift)">
+                    {{ isShiftActive(shift) ? 'A decorrer' : 'Turno fechado' }}
+                  </h3>
+                </div>
+                <div class="shift-icons">
+                  <a 
+                    (click)="openWorkersOnShiftModal(shift)" 
+                    [class.disabled]="!isShiftActive(shift)" 
+                    [style.pointer-events]="!isShiftActive(shift) ? 'none' : 'auto'">
+                    <ion-icon name="people-outline"></ion-icon>
+                    <span>Trabalhadores</span>
+                  </a>
+                  <a 
+                    (click)="openWorkersReadertModal(shift.id)" 
+                    [class.disabled]="!isShiftActive(shift)" 
+                    [style.pointer-events]="!isShiftActive(shift) ? 'none' : 'auto'">
+                    <ion-icon name="qr-code-outline"></ion-icon>
+                    <span>Leitor</span>
+                  </a>
+                </div>
+              </ion-label>
+            </ion-item>
+            
+  
+            <ion-item lines="none" *ngIf="!shiftsForRegister || shiftsForRegister.length === 0">
+              <ion-label lines="none">Não foi definido como líder em nenhum turno.</ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-content>
+    </div>
+  </ion-tab>
+  
+  
+
+
+
+
+
+
+
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home">
+      <ion-icon name="home-outline"></ion-icon>
+      Início
+    </ion-tab-button>
+    <ion-tab-button tab="absenses">
+      <ion-icon name="person-remove-outline"></ion-icon>
+      Faltas
+    </ion-tab-button>
+    <ion-tab-button tab="offdays">
+      <ion-icon name="airplane-outline"></ion-icon>
+      Folgas
+    </ion-tab-button>
+    <ion-tab-button tab="reader">
+      <ion-icon name="qr-code-outline"></ion-icon>
+      Leitor
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

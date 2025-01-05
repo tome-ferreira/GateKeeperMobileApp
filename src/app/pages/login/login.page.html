@@ -1,0 +1,49 @@
+
+
+<ion-content class="login-page ion-padding">
+  <div class="logo-container">
+    <img src="../assets/logo.png" alt="GK Logo" class="logo"  />
+  </div>
+
+  <form [formGroup]="form" class="login-form containner">
+
+    <div class="inputs-group">
+      <div class="input">
+        <div class="input-label">
+          <ion-icon name="mail" style="color: #fff; font-size: 1.2rem; margin-right: 10px;"></ion-icon>
+          <label for="email" style="color: #fff; font-size: 1rem;">Email</label>
+        </div>
+        
+        <ion-input formControlName="email" placeholder="" type="email" required></ion-input>
+        
+        <ion-note *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched" color="danger">
+          Campo obrigatório!
+        </ion-note>
+      </div>
+
+      <div class="input">
+        <div class="input-label">
+          <ion-icon name="key-outline" style="color: #fff; font-size: 1.2rem; margin-right: 10px;"></ion-icon>
+          <label for="password" style="color: #fff; font-size: 1rem;">Password</label>
+        </div>
+        
+        <ion-input formControlName="password" placeholder="" type="password" required></ion-input>
+        
+        <ion-note *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched" color="danger">
+          Campo obrigatório!
+        </ion-note>
+      </div>
+    </div>
+  </form>
+
+  <ion-item class="item-background-color" lines="none">
+    <ion-checkbox slot="start" [(ngModel)]="rememberUser" name="rememberUser" lines="none"></ion-checkbox>
+    <ion-label  style="color: #fff" lines="none">Lembrar-me</ion-label>
+  </ion-item>
+
+
+  <ion-button expand="block" type="submit" (click)="saveForm()" class="ion-text-center button">
+    <span style="color: #000 !important">Login</span>
+  </ion-button>
+</ion-content>
+

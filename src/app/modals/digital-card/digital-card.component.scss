@@ -1,0 +1,14 @@
+.qr-code-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
+  
+  .qr-code-container img {
+    width: 100%; /* Ensures the QR code spans the full width */
+    max-width: 500px; /* Optional: Set a max width to avoid distortion on larger screens */
+    height: auto; /* Maintains aspect ratio */
+  }

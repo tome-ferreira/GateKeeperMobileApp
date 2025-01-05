@@ -1,0 +1,82 @@
+:host {
+  --ion-color-primary: #fff; /* Replace with your desired color */
+  --ion-color-primary-rgb: 100, 100, 100; /* RGB equivalent */
+}
+
+ion-content {
+  --background: #034130; 
+  text-align: center;
+  padding: 10px;
+
+  // Logo
+  .logo {
+    width: 200px;
+    height: auto;
+    margin: 30px auto 20px;
+  }
+
+  .inputs-group{
+    max-width: 400px; margin: 20px auto;
+  }
+
+  .input{
+    margin-bottom: 20px; text-align: left; position: relative;
+  }
+
+  .input-label{
+    display: flex; align-items: center; margin-bottom: 5px;
+  }
+
+  .input-campo{
+    width: 100%; padding: 10px 10px 10px 20px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; background-color: #DCDCDC;
+  }
+
+  
+  // Texto de recuperação
+  .recovery-text {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #333;
+
+    .recovery-link {
+      color: #d32f2f;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+
+  ion-input{
+    background: #DCDCDC !important;
+    color: #333;
+    padding: 5px; 
+    --padding-start: 10px; 
+    --padding-end: 10px; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    border-radius: 25px;
+    }
+
+  
+
+  .item-background-color{
+    --ion-item-background:#034130;
+  }
+
+  .button{
+    margin: 20px auto;
+    width: 100%; 
+    padding: 10px 10px 10px 20px; 
+  }
+
+  
+}
+ 
+ 
+ 
+ 
+
+  

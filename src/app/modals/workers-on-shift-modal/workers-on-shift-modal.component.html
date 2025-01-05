@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Fechar</ion-button>
+    </ion-buttons>
+    <ion-title>Trabalhadores do turno</ion-title>
+    <ion-buttons slot="end">
+      
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item *ngFor="let worker of workers">
+    <ion-label>
+      <h2>{{ worker.name }} - <span [ngStyle]="{ 'background-color': getStatusColor(worker.whereIs) }">  {{ worker.whereIs }}  </span></h2>
+    </ion-label>
+  </ion-item>
+</ion-content>

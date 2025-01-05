@@ -1,0 +1,7 @@
+{
+  "name": "GateKeeperMobileAppV1",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

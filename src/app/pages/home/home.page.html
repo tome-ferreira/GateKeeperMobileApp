@@ -1,0 +1,32 @@
+<ion-content class="ion-padding">
+  <div class="title-container">
+    <h2 class="page-title center-title">Selecione a empresa</h2>
+  </div>
+
+  <div class="company-list">
+    <ion-button
+      *ngFor="let company of companies"
+      expand="block"
+      shape="round"
+      class="company-button"
+      (click)="goToMain(company.id)"
+    >
+      {{ company.name }}
+    </ion-button>
+
+    <ion-label *ngIf="!companies || companies.length === 0" class="no-companies">
+      Nenhuma empresa encontrada.
+    </ion-label>
+  </div>
+
+  <ion-button
+    expand="block"
+    shape="round"
+    class="logout-button"
+    (click)="logout()"
+  >
+    <ion-icon slot="start" name="log-out-outline"></ion-icon>
+    Logout
+  </ion-button>
+</ion-content>
+

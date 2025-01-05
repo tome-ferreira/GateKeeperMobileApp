@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Fechar</ion-button>
+    </ion-buttons>
+    <ion-title>Registar movimento</ion-title>
+    <ion-buttons slot="end">
+      
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-button expand="block" color="success" (click)="scan(true)" [disabled]="!isSupported">
+    Entrada
+  </ion-button>
+  <ion-button expand="block" color="danger" (click)="scan(false)" [disabled]="!isSupported">
+    Saída
+  </ion-button>
+  
+  <div class="ion-margin-top">
+        <ion-accordion-group>
+      <ion-accordion value="first">
+        <ion-item slot="header" color="light">
+          <ion-label>Meus movimentos</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-button expand="block" color="success" (click)="myEntrance()">
+            Entrar
+          </ion-button>
+          <ion-button expand="block" color="danger" (click)="myExit()">
+            Sair
+          </ion-button>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </div>
+  
+  <ion-list>
+    <ion-item *ngFor="let barcode of barcodes">
+      <ion-label position="stacked">{{ barcode.format }}</ion-label>
+      <ion-input type="text" [value]="barcode.rawValue"></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Fechar</ion-button>
+    </ion-buttons>
+    <ion-title>Registar movimento</ion-title>
+    <ion-buttons slot="end">
+      
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content *ngIf="messageToDisplay === 'Movimento registado'; else errorMessage">
+  <div class="ion-padding">
+    <h2 class="center-title">{{ messageToDisplay }}</h2>
+    <img src="../assets/correto.png" alt="correto" class="ion-margin-top" style="width: 100%; height: auto;"/>
+
+    <div class="ion-margin-top">
+      <h3 class="center-title">Trabalhador: {{worker.number}} - {{worker.name}}</h3>
+    </div>
+  </div>
+</ion-content>
+<ng-template #errorMessage>
+  <ion-content>
+    <div class="ion-padding">
+      <h2 class="center-title">{{ messageToDisplay }}</h2>
+      <img src="../assets/errado.png" alt="correto" class="ion-margin-top" style="width: 100%; height: auto;"/>
+  
+      
+    </div>
+  </ion-content>
+</ng-template>
+

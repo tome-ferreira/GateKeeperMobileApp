@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-title>Editar pedido</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="delete()">Apagar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form">
+    <!-- Notes -->
+    <ion-item lines="none">
+      <ion-label position="stacked" lines="none">Notas</ion-label>
+      <ion-textarea formControlName="notes" lines="none" class="input-costum"></ion-textarea>
+    </ion-item>
+
+    <!-- Start Date -->
+    <ion-item lines="none">
+      <ion-label position="floating" lines="none">Data de Início</ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-datetime lines="none"
+        formControlName="start"
+        presentation="popover"
+        placeholder="Selecionar Data"
+      ></ion-datetime>
+    </ion-item>
+    <ion-note lines="none"
+      *ngIf="form.get('start')?.hasError('required') && form.get('start')?.touched"
+      color="danger"
+    >
+      Data de início é obrigatória!
+    </ion-note>
+    <ion-note lines="none"
+      *ngIf="form.hasError('startNotFuture') && form.get('start')?.touched"
+      color="danger"
+    >
+      Data de início deve ser no futuro!
+    </ion-note>
+
+    <!-- End Date -->
+    <ion-item lines="none">
+      <ion-label position="floating" lines="none">Data de Fim</ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-datetime lines="none"
+        formControlName="end"
+        presentation="popover"
+        placeholder="Selecionar Data"
+      ></ion-datetime>
+    </ion-item>
+    <ion-note lines="none"
+      *ngIf="form.get('end')?.hasError('required') && form.get('end')?.touched"
+      color="danger"
+    >
+      Data de fim é obrigatória!
+    </ion-note>
+    <ion-note lines="none"
+      *ngIf="form.hasError('endNotFuture') && form.get('end')?.touched"
+      color="danger"
+    >
+      Data de fim deve ser no futuro!
+    </ion-note>
+
+    <!-- General Form Errors -->
+    <ion-note lines="none" *ngIf="form.hasError('startAfterEnd')" color="danger">
+      Data de início deve ser antes da data de fim!
+    </ion-note>
+  </form>
+</ion-content>
+
+<ion-footer lines="none">
+  <ion-toolbar lines="none">
+    <ion-button lines="none"
+      color="success"
+      [disabled]="form.invalid"
+      (click)="saveForm()"
+      expand="full"
+    >
+      Salvar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
+

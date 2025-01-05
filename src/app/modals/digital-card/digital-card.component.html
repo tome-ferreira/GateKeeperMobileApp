@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-title>Cartão digital</ion-title>
+    <ion-buttons slot="end">
+      
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="qr-code-container">
+    <!-- QR Code Component -->
+    <qrcode 
+      [qrdata]="link" 
+      [width]="400" 
+      [errorCorrectionLevel]="'M'">
+    </qrcode>
+  </div>
+</ion-content>
